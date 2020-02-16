@@ -41,11 +41,19 @@ namespace _12.Chint.Hygiene.Controllers
         // GET: api/WxBind/BindWx
         [HttpPost]
         [ResponseType(typeof(tb_User))]
-        public IHttpActionResult BindWx(tb_User user)
+        public IHttpActionResult Bind(tb_User user)
         {
-            db.Users.Add(user);
-            db.SaveChanges();
-            return Ok("绑定成功！");
+            if (db.Users.Where(wx=>wx.openid==user.openid).Count()==0)
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+                return Ok(true);
+            }
+            else
+            {
+                return Ok(false);
+            }
+
         }
 
         protected override void Dispose(bool disposing)
