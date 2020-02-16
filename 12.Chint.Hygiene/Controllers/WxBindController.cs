@@ -34,7 +34,7 @@ namespace _12.Chint.Hygiene.Controllers
             var tb_User = db.Users.Where(wx => wx.openid == id);//Find(id);
             if (tb_User.Count()==0)
             {
-                return Ok("请绑定微信！");
+                return Ok("请绑定微信");
             }
             return Ok(tb_User.ToList());
         }
